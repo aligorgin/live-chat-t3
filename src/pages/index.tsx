@@ -1,10 +1,19 @@
 import type {NextPage} from "next";
 import Head from "next/head";
 import {trpc} from "../utils/trpc";
+import {customAlphabet} from "nanoid";
+import {useRouter} from "next/router";
+
+const nanoid = customAlphabet('qwertyuiopasdfghjklzxcvbnm0987654321', 4)
 
 const Home: NextPage = () => {
 
-    const hello = trpc.useQuery(["example.hello", {text: "from tRPC"}]);
+    const router = useRouter();
+
+    function createRoom() {
+        const roomId = nanoid();
+        router.push(`/room/${roomId}`)
+    }
 
     return (
         <>
@@ -15,7 +24,7 @@ const Home: NextPage = () => {
             </Head>
 
             <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
-                <button>create chat room</button>
+                <button onClick={createRoom}>create chat room</button>
             </main>
         </>
     );
