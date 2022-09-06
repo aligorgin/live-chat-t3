@@ -21,8 +21,6 @@ console.log(`ws server started`);
 
 process.on('SIGTERM', () => {
     console.log('SIGTERM');
-
     handler.broadcastReconnectNotification();
-
     wss.close();
 })

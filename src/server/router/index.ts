@@ -1,6 +1,11 @@
 // src/server/router/index.ts
 import {createRouter} from "./context";
 import superjson from "superjson";
+import fetch from "node-fetch";
+
+if (!global.fetch){
+    (global.fetch as any) = fetch;
+}
 
 import {roomRouter} from "./room";
 
